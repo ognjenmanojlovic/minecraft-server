@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Minecraft-logo.png" width="400">
-</p>
-
 # Minecraft Java Server
 
 A fully containerized deployment of a **Minecraft Java Edition Server**.
