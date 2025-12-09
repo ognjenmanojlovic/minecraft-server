@@ -15,6 +15,9 @@ world_nether/
 world_the_end/
 backups/
 
+# Minecraft server binary (do not commit)
+server.jar
+
 # Editor/IDE
 .vscode/
 .idea/
