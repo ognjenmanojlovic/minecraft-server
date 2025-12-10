@@ -11,7 +11,7 @@ This setup includes:
 - **A custom-built Minecraft Java server image** based on Java 21  
 - **Persistent world storage** using a Docker volume, ensuring game progress is retained across restarts  
 - **Environment-driven configuration**, such as EULA acceptance and JVM memory allocation  
-- **Manual upload of the official `server.jar`**, which is excluded from Git due to licensing restrictions  
+- **Manual download and upload of the official `server.jar`**, which is excluded from Git due to licensing restrictions  
 - **Port forwarding (`8888 → 25565`)**, making the server accessible externally while running internally on the default Minecraft port  
 - **An automated startup script (`start.sh`)** that prepares required files and ensures consistent, reliable server startup  
 
@@ -52,7 +52,7 @@ minecraft-server/
 ├─ Dockerfile
 ├─ example.env
 ├─ start.sh
-├─ server.jar
+├─ server.jar                # Added manually, never committed to Git
 ├─ .gitignore
 └─ README.md
 ```
@@ -85,55 +85,72 @@ git --version
 
 ## Deployment (Server)
 
-### 1. Connect to your VM
+### 1. Download the official Minecraft Server JAR
+
+You must download the official **Minecraft Java Edition Server JAR** manually.
+
+Download from the official Minecraft website:  
+https://www.minecraft.net/en-us/download/server
+
+Save the file as:
+
+```
+server.jar
+```
+
+### 2. Connect to your server
 
 ```bash
 ssh <username>@<server-ip>
 ```
 
-### 2. Clone your repository
+### 3. Clone your repository
 
 ```bash
-git clone https://github.com/<your-username>/minecraft-server.git
+git clone https://github.com/ognjenmanojlovic/minecraft-server.git
 ```
 
 ```bash
 cd minecraft-server
 ```
 
-### 3. Copy environment template
+### 4. Copy environment template
 
 ```bash
 cp example.env .env
 ```
 
-### 4. Upload the Minecraft server JAR
+Edit `.env` if needed (EULA, RAM allocation).
 
-From your local machine:
+### 5. Upload the Minecraft server JAR to your VM
+
+From your **local machine**:
 
 ```bash
 scp /path/to/server.jar <username>@<server-ip>:~/minecraft-server/server.jar
 ```
 
-### 5. Build image
+### 6. Build the Docker image
 
 ```bash
 docker compose build
 ```
 
-### 6. Start server
+### 7. Start the Minecraft server
 
 ```bash
 docker compose up -d
 ```
 
-### 7. View logs
+### 8. View server logs
 
 ```bash
 docker compose logs -f mc-server
 ```
 
-### 8. Connect via Minecraft Java Edition
+### 9. Connect via Minecraft Java Edition
+
+Open Multiplayer and enter:
 
 ```
 <server-ip>:8888
@@ -195,7 +212,7 @@ docker compose build
 
 ## Security Notes
 
-- Never commit `server.jar`  
+- Do not commit `server.jar`  
 - `.env` must stay private  
 - Avoid exposing unnecessary ports  
 - Use SSH keys for deployment  
