@@ -1,20 +1,24 @@
 # Minecraft Java Server
 
-A fully containerized deployment of a **Minecraft Java Edition Server**.
+A fully containerized deployment of a **Minecraft Java Edition Server**, built using Docker and Docker Compose.  
+This setup transforms the traditional standalone Minecraft server into an isolated, reproducible, and easily deployable containerized service.
 
-This project demonstrates:
+The **Minecraft Server Project** demonstrates how to package a game server inside a Docker image, control its behavior through environment variables, and operate it securely on a remote VM with persistent storage.  
+All configuration, data handling, and startup logic are structured according to DevSecOps best practices.
 
-- Running a Minecraft Java server inside Docker  
-- Managing persistent world data using Docker volumes  
-- Secure and reproducible deployment on a remote VM  
-- Environment-based configuration  
-- Usage of a custom startup script (`start.sh`)  
+This setup includes:
+
+- **A custom-built Minecraft Java server image** based on Java 21  
+- **Persistent world storage** using a Docker volume, ensuring game progress is retained across restarts  
+- **Environment-driven configuration**, such as EULA acceptance and JVM memory allocation  
+- **Manual upload of the official `server.jar`**, which is excluded from Git due to licensing restrictions  
+- **Port forwarding (`8888 → 25565`)**, making the server accessible externally while running internally on the default Minecraft port  
+- **An automated startup script (`start.sh`)** that prepares required files and ensures consistent, reliable server startup  
 
 ---
 
 ## Table of Contents
 
-- [Description](#description)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Quickstart](#quickstart)
@@ -26,20 +30,6 @@ This project demonstrates:
 - [Testing Checklist](#testing-checklist)
 - [Security Notes](#security-notes)
 - [Author](#author)
-
----
-
-## Description
-
-The **Minecraft Server Project** demonstrates how to containerize, configure, and deploy a standalone game server using Docker and Docker Compose.
-
-This includes:
-
-- A Java-based Minecraft server (1.21.10)
-- Persistent world storage using a named Docker volume  
-- Environment configuration (EULA, JVM memory)  
-- Uploading official `server.jar` manually  
-- Running the server behind port forwarding (`8888 → 25565`)  
 
 ---
 
