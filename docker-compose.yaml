@@ -1,0 +1,14 @@
+services:
+  mc-server:
+    build: .
+    container_name: mc-server
+    env_file:
+      - .env
+    ports:
+      - "8888:25565"
+    volumes:
+      - mc_data:/mc
+    restart: unless-stopped
+
+volumes:
+  mc_data:
